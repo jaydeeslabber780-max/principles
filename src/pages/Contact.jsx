@@ -47,8 +47,8 @@ const contactInfo = [
         <path d="M2 18c0-3.31 3.58-6 8-6s8 2.69 8 6" stroke="#B08D4F" strokeWidth="1.3" strokeLinecap="round" />
       </svg>
     ),
-    lines: ['083 663 5954', 'herme@principlesfc.co.za'],
-    href: 'tel:0836635954',
+    lines: ['083 633 5954', 'herme@principlesfc.co.za'],
+    href: 'tel:0836335954',
     href2: 'mailto:herme@principlesfc.co.za',
   },
 ]
