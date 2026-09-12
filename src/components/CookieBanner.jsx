@@ -9,7 +9,7 @@ import {
 } from '../lib/consent'
 
 const buttonBase =
-  'flex-1 cursor-pointer px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold'
+  'flex-1 cursor-pointer px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold md:px-4 md:py-2.5 md:text-xs'
 
 export default function CookieBanner() {
   const { consent, ready } = useConsent()
@@ -28,27 +28,27 @@ export default function CookieBanner() {
     <div
       role="region"
       aria-label="Cookie preferences"
-      className="fixed inset-x-4 bottom-4 z-[60] md:right-auto md:max-w-sm"
+      className="fixed inset-x-3 bottom-3 z-[60] p-4 md:inset-x-4 md:bottom-4 md:right-auto md:max-w-sm md:p-6"
       style={{
         backgroundColor: '#0E2233',
         color: '#F7F4EF',
         border: '1px solid rgba(176,141,79,0.35)',
         boxShadow: '0 16px 40px rgba(8,21,32,0.35)',
-        padding: 24,
         fontFamily: 'Inter, sans-serif',
       }}
     >
-      <p style={{ fontFamily: 'Fraunces, serif', fontSize: '1.1rem', marginBottom: 8 }}>
+      {/* Kept short so on a phone it covers as little of the page as possible. */}
+      <p className="hidden md:block" style={{ fontFamily: 'Fraunces, serif', fontSize: '1.1rem', marginBottom: 8 }}>
         Cookies &amp; your privacy
       </p>
-      <p style={{ fontSize: '0.825rem', lineHeight: 1.65, color: 'rgba(247,244,239,0.78)', marginBottom: 16 }}>
-        We don't use tracking or advertising cookies. The map on our Contact page is
-        provided by Google, which sets its own cookies, so we only load it if you allow it.{' '}
+      <p className="mb-3 md:mb-4" style={{ fontSize: '0.8rem', lineHeight: 1.55, color: 'rgba(247,244,239,0.78)' }}>
+        We don't use tracking cookies. The Google map on our Contact page sets cookies, so it only
+        loads if you allow it.{' '}
         <Link to="/privacy" className="text-gold-light underline underline-offset-2 hover:text-gold">
           Privacy policy
         </Link>
       </p>
-      <div className="flex gap-3">
+      <div className="flex gap-2 md:gap-3">
         <button
           type="button"
           onClick={() => choose(CONSENT_ESSENTIAL)}

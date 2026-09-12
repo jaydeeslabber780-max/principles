@@ -191,7 +191,7 @@ export default function Navbar() {
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             style={{ overflow: 'hidden', backgroundColor: '#F7F4EF', borderTop: '1px solid rgba(14,34,51,0.08)' }}
           >
-            <nav className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-1">
+            <nav className="mobile-menu-scroll max-w-7xl mx-auto px-6 py-6 flex flex-col gap-1">
               {[
                 { label: 'Home', to: '/' },
                 { label: 'About', to: '/about' },

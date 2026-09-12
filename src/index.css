@@ -211,3 +211,20 @@ h1, h2, h3, h4 {
   background: #B08D4F;
   color: #0E2233;
 }
+
+/* The mobile menu lives inside the fixed navbar, which can't scroll. Once the
+   Services list is expanded it can be taller than a small phone's screen, so
+   the menu scrolls within the space below the 72px bar instead of being cut
+   off. dvh excludes the browser's own toolbars; vh is the fallback. */
+.mobile-menu-scroll {
+  max-height: calc(100vh - 72px);
+  max-height: calc(100dvh - 72px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* The menu is a flex column, whose items shrink by default when it's height-
+   capped; the Services list (overflow hidden) would get squeezed and clip its
+   links. Keep every item full-size so the menu scrolls instead. */
+.mobile-menu-scroll > * {
+  flex-shrink: 0;
+}
