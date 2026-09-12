@@ -114,17 +114,17 @@ export default function Contact() {
       <Helmet>
         <title>Contact — Principles Financial Consultants</title>
         <meta name="description" content="Get in touch with Principles Financial Consultants in Ruimsig, Gauteng. Call +27 10 446 8033 or email riana@principlesfc.co.za." />
-        <link rel="canonical" href="https://principlesfc.co.za/contact" />
+        <link rel="canonical" href="https://principlesfc-sa.co.za/contact" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Principles Financial Consultants" />
         <meta property="og:title" content="Contact — Principles Financial Consultants" />
         <meta property="og:description" content="Get in touch with Principles Financial Consultants in Ruimsig, Gauteng. Call +27 10 446 8033 or email riana@principlesfc.co.za." />
-        <meta property="og:url" content="https://principlesfc.co.za/contact" />
-        <meta property="og:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta property="og:url" content="https://principlesfc-sa.co.za/contact" />
+        <meta property="og:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact — Principles Financial Consultants" />
         <meta name="twitter:description" content="Get in touch with Principles Financial Consultants in Ruimsig, Gauteng." />
-        <meta name="twitter:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta name="twitter:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
       </Helmet>
 
       {/* Page header */}

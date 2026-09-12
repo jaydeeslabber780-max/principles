@@ -17,7 +17,7 @@ export default function Legal() {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href="https://principlesfc.co.za/legal" />
+        <link rel="canonical" href="https://principlesfc-sa.co.za/legal" />
       </Helmet>
 
       <LegalPage eyebrow="Legal" title="Legal & Regulatory Disclosures" updated={POLICY_LAST_UPDATED}>

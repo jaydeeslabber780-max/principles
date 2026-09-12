@@ -161,17 +161,17 @@ export default function Services() {
       <Helmet>
         <title>Services — Principles Financial Consultants</title>
         <meta name="description" content="Seven financial advisory services: Group Retirement, Group Risk, Healthcare, Business Insurance, Household & Motor, Personal Financial Planning, and Wills & Trusts." />
-        <link rel="canonical" href="https://principlesfc.co.za/services" />
+        <link rel="canonical" href="https://principlesfc-sa.co.za/services" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Principles Financial Consultants" />
         <meta property="og:title" content="Services — Principles Financial Consultants" />
         <meta property="og:description" content="Seven financial advisory services: Group Retirement, Group Risk, Healthcare, Business Insurance, Household & Motor, Personal Financial Planning, and Wills & Trusts." />
-        <meta property="og:url" content="https://principlesfc.co.za/services" />
-        <meta property="og:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta property="og:url" content="https://principlesfc-sa.co.za/services" />
+        <meta property="og:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Services — Principles Financial Consultants" />
         <meta name="twitter:description" content="Seven financial advisory services, from group retirement to wills & trusts." />
-        <meta name="twitter:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta name="twitter:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
       </Helmet>
 
       {/* Page header */}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://principlesfc.co.za/sitemap.xml
+Sitemap: https://principlesfc-sa.co.za/sitemap.xml

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://principlesfc.co.za/</loc>
+    <loc>https://principlesfc-sa.co.za/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://principlesfc.co.za/about</loc>
+    <loc>https://principlesfc-sa.co.za/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://principlesfc.co.za/services</loc>
+    <loc>https://principlesfc-sa.co.za/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://principlesfc.co.za/contact</loc>
+    <loc>https://principlesfc-sa.co.za/contact</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://principlesfc.co.za/privacy</loc>
+    <loc>https://principlesfc-sa.co.za/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://principlesfc.co.za/legal</loc>
+    <loc>https://principlesfc-sa.co.za/legal</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

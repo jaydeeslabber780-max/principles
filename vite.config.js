@@ -3,11 +3,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  // GitHub Pages serves this repo from https://jaydeeslabber780-max.github.io/principles/
-  // so all built asset URLs need to be prefixed with /principles/ instead of /.
-  // (Switch this to '/' if a custom domain is ever added, since a custom
-  // domain serves from the root instead of a /principles/ subpath.)
-  base: '/principles/',
+  // The site is served from the root of its custom domain
+  // (https://principlesfc-sa.co.za). If it is ever served from a subpath again,
+  // e.g. https://<user>.github.io/principles/ without a custom domain, change
+  // this back to '/principles/'.
+  base: '/',
   plugins: [
     tailwindcss(),
     react(),

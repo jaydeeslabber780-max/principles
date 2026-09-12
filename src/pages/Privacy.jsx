@@ -15,7 +15,7 @@ export default function Privacy() {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <link rel="canonical" href="https://principlesfc.co.za/privacy" />
+        <link rel="canonical" href="https://principlesfc-sa.co.za/privacy" />
       </Helmet>
 
       <LegalPage eyebrow="Privacy" title="Privacy & Cookie Policy" updated={POLICY_LAST_UPDATED}>

@@ -37,17 +37,17 @@ export default function Home() {
       <Helmet>
         <title>Principles Financial Consultants — Empowering South Africans to Retire Secure</title>
         <meta name="description" content="Independent employee-benefits and financial advisory firm based in Ruimsig, Gauteng. FSP 19721. 45+ years of combined experience consulting to 40+ retirement funds." />
-        <link rel="canonical" href="https://principlesfc.co.za/" />
+        <link rel="canonical" href="https://principlesfc-sa.co.za/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Principles Financial Consultants" />
         <meta property="og:title" content="Principles Financial Consultants — Empowering South Africans to Retire Secure" />
         <meta property="og:description" content="Independent employee-benefits and financial advisory firm based in Ruimsig, Gauteng. FSP 19721. 45+ years of combined experience consulting to 40+ retirement funds." />
-        <meta property="og:url" content="https://principlesfc.co.za/" />
-        <meta property="og:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta property="og:url" content="https://principlesfc-sa.co.za/" />
+        <meta property="og:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Principles Financial Consultants" />
         <meta name="twitter:description" content="Independent employee-benefits and financial advisory firm based in Ruimsig, Gauteng. FSP 19721." />
-        <meta name="twitter:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta name="twitter:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
       </Helmet>
 
       {/* ── HERO ── */}

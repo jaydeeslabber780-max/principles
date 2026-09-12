@@ -19,17 +19,17 @@ export default function About() {
       <Helmet>
         <title>About Us — Principles Financial Consultants</title>
         <meta name="description" content="Meet Riana and Herme Slabber — the experienced team behind Principles Financial Consultants. 45+ years of combined expertise in employee benefits and fund consulting." />
-        <link rel="canonical" href="https://principlesfc.co.za/about" />
+        <link rel="canonical" href="https://principlesfc-sa.co.za/about" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Principles Financial Consultants" />
         <meta property="og:title" content="About Us — Principles Financial Consultants" />
         <meta property="og:description" content="Meet Riana and Herme Slabber — the experienced team behind Principles Financial Consultants. 45+ years of combined expertise in employee benefits and fund consulting." />
-        <meta property="og:url" content="https://principlesfc.co.za/about" />
-        <meta property="og:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta property="og:url" content="https://principlesfc-sa.co.za/about" />
+        <meta property="og:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us — Principles Financial Consultants" />
         <meta name="twitter:description" content="Meet the team behind Principles Financial Consultants." />
-        <meta name="twitter:image" content="https://principlesfc.co.za/og-image.jpg" />
+        <meta name="twitter:image" content="https://principlesfc-sa.co.za/og-image.jpg" />
       </Helmet>
 
       {/* Page header */}
