@@ -74,6 +74,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -83,7 +84,13 @@ body {
   color: #1C1C1C;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Anything wider than the screen would otherwise widen the whole page on
+     phones (pushing the menu button off-screen). 'clip', unlike 'hidden',
+     doesn't turn body into a scroll container; 'hidden' is the fallback for
+     older browsers. */
   overflow-x: hidden;
+  overflow-x: clip;
+  overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4 {

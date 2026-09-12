@@ -228,7 +228,7 @@ export default function Services() {
             key={s.id}
             id={s.id}
             style={{ backgroundColor: isEven ? '#F7F4EF' : '#EDE9E2', scrollMarginTop: 80 }}
-            className="py-20 md:py-28"
+            className="py-20 md:py-28 overflow-hidden"
           >
             <div className="max-w-7xl mx-auto px-6 md:px-12">
               <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start ${!isEven ? 'md:[&>*:first-child]:order-2' : ''}`}>

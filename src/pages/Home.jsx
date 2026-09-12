@@ -209,9 +209,6 @@ export default function Home() {
                 <Link
                   to={`/services#${s.anchor}`}
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: '56px 1fr auto',
-                    gap: '0 24px',
                     alignItems: 'center',
                     padding: '24px 0',
                     borderTop: i === 0 ? '1px solid rgba(14,34,51,0.12)' : 'none',
@@ -219,13 +216,13 @@ export default function Home() {
                     textDecoration: 'none',
                     group: true,
                   }}
-                  className="group"
+                  className="group grid grid-cols-[36px_minmax(0,1fr)_auto] gap-x-4 md:grid-cols-[56px_minmax(0,1fr)_auto] md:gap-x-6"
                   onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(14,34,51,0.02)'}
                   onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                 >
                   <span style={{ fontFamily: 'Fraunces, serif', fontSize: '1.1rem', fontWeight: 300, color: '#B08D4F', opacity: 0.7 }}>{s.num}</span>
-                  <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-8">
-                    <span style={{ fontFamily: 'Fraunces, serif', fontSize: 'clamp(1.05rem, 1.8vw, 1.3rem)', fontWeight: 400, color: '#0E2233', minWidth: 260 }}>{s.title}</span>
+                  <div className="min-w-0 flex flex-col md:flex-row md:items-center gap-1 md:gap-8">
+                    <span style={{ fontFamily: 'Fraunces, serif', fontSize: 'clamp(1.05rem, 1.8vw, 1.3rem)', fontWeight: 400, color: '#0E2233' }} className="md:min-w-[260px]">{s.title}</span>
                     <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8625rem', color: '#6B6B6B', lineHeight: 1.6, maxWidth: 440 }}>{s.blurb}</span>
                   </div>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, color: '#B08D4F', transition: 'transform 0.2s' }}
