@@ -11,7 +11,9 @@ export const business = {
   fsp: '19721',
   address: '20 St Andrews Estate, Dryf Avenue, Ruimsig, Gauteng, South Africa',
   landline: '+27 10 446 8033',
-  landlineHref: 'tel:+27104468033',
+  // Phone links use the local 0XX format, which dials exactly like typing
+  // the number on a South African phone.
+  landlineHref: 'tel:0104468033',
   enquiriesEmail: 'riana@principlesfc.co.za',
   keyIndividual: 'Herme Slabber',
   informationOfficer: { name: 'Herme Slabber', email: 'herme@principlesfc.co.za' },

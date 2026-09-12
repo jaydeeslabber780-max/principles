@@ -130,7 +130,7 @@ export default function About() {
                     Riana drives the firm's growth and strategic direction. With 20+ years of deep expertise across employee benefits, fund consulting, medical schemes and wealth management, she combines big-picture vision with hands-on client relationships that span South Africa's largest employers.
                   </p>
                   <div style={{ marginTop: 28 }}>
-                    <a href="tel:+27824555310" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', color: '#B08D4F', textDecoration: 'none', display: 'block', marginBottom: 8 }}>
+                    <a href="tel:0824555310" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', color: '#B08D4F', textDecoration: 'none', display: 'block', marginBottom: 8 }}>
                       082 455 5310
                     </a>
                     <a href="mailto:riana@principlesfc.co.za" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', color: 'rgba(247,244,239,0.5)', textDecoration: 'none' }}>
@@ -168,7 +168,7 @@ export default function About() {
                     B Com (Economics) and Higher Diploma in Education. With the firm since 2005. A qualified trustee trainer who developed course content for the FSCA's Professional Trusteeship programme. His prior career spanned Momentum and NMG Consultants & Actuaries. Past trustee-training clients include FNB, Pick n Pay, BHP Billiton SA, Anglo American, DaimlerChrysler and the Chamber of Mines.
                   </p>
                   <div style={{ marginTop: 28 }}>
-                    <a href="tel:+27836635954" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', color: '#B08D4F', textDecoration: 'none', display: 'block', marginBottom: 8 }}>
+                    <a href="tel:0836635954" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', color: '#B08D4F', textDecoration: 'none', display: 'block', marginBottom: 8 }}>
                       083 663 5954
                     </a>
                     <a href="mailto:herme@principlesfc.co.za" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', color: 'rgba(247,244,239,0.5)', textDecoration: 'none' }}>

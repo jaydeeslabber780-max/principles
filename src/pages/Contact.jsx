@@ -25,7 +25,7 @@ const contactInfo = [
       </svg>
     ),
     lines: ['+27 10 446 8033'],
-    href: 'tel:+27104468033',
+    href: 'tel:0104468033',
   },
   {
     label: 'Riana Slabber',
@@ -36,7 +36,7 @@ const contactInfo = [
       </svg>
     ),
     lines: ['082 455 5310', 'riana@principlesfc.co.za'],
-    href: 'tel:+27824555310',
+    href: 'tel:0824555310',
     href2: 'mailto:riana@principlesfc.co.za',
   },
   {
@@ -48,7 +48,7 @@ const contactInfo = [
       </svg>
     ),
     lines: ['083 663 5954', 'herme@principlesfc.co.za'],
-    href: 'tel:+27836635954',
+    href: 'tel:0836635954',
     href2: 'mailto:herme@principlesfc.co.za',
   },
 ]
