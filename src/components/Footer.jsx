@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo-full.png'
+import { openCookieSettings } from '../lib/consent'
 
 const year = new Date().getFullYear()
 
@@ -123,6 +124,11 @@ export default function Footer() {
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.775rem', color: 'rgba(247,244,239,0.4)' }}>
             © {year} Principles Financial Consultants. All rights reserved.
           </p>
+          <nav aria-label="Legal" className="flex flex-wrap items-center gap-x-5 gap-y-2" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.775rem' }}>
+            <Link to="/privacy" className="text-paper/55 transition-colors hover:text-gold">Privacy &amp; Cookies</Link>
+            <Link to="/legal" className="text-paper/55 transition-colors hover:text-gold">Legal &amp; Disclosures</Link>
+            <button type="button" onClick={openCookieSettings} className="cursor-pointer text-paper/55 transition-colors hover:text-gold">Cookie settings</button>
+          </nav>
           <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.775rem', color: 'rgba(247,244,239,0.4)' }}>
             FSP 19721 · FAIS Compliant · FSCA Accredited
           </p>

@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .claude/
 desktop.ini
+
+# SSR build artifacts (intermediate, deleted after prerender)
+.ssr-build

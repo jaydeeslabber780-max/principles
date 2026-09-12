@@ -1,0 +1,15 @@
+# Opens pull requests when dependencies have security fixes or updates, so
+# known vulnerabilities don't sit unpatched. Grouped to keep the PR count low.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm-dependencies:
+        patterns: ['*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

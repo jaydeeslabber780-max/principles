@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
+import MapEmbed from '../components/MapEmbed'
+import { FORM_ENDPOINT, business } from '../config/site'
 
 const contactInfo = [
   {
@@ -63,22 +66,47 @@ const subjects = [
 ]
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false)
-  const [sending, setSending] = useState(false)
+  // idle | sending | sent | mailto | error
+  const [status, setStatus] = useState('idle')
+  const sending = status === 'sending'
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    setSending(true)
-    const form = e.target
-    const data = new FormData(form)
+    const data = new FormData(e.currentTarget)
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString(),
-    })
-      .then(() => { setSubmitted(true); setSending(false) })
-      .catch(() => { setSending(false) })
+    // Honeypot: the field is invisible to people, so only bots fill it in.
+    if (data.get('_gotcha')) {
+      setStatus('sent')
+      return
+    }
+
+    if (!FORM_ENDPOINT) {
+      const subject = `Website enquiry: ${data.get('subject') || 'General enquiry'}`
+      const body = [
+        `Name: ${data.get('name')}`,
+        `Email: ${data.get('email')}`,
+        `Phone: ${data.get('phone') || 'not given'}`,
+        `Service: ${data.get('subject') || 'not specified'}`,
+        '',
+        data.get('message'),
+      ].join('\n')
+      window.location.href = `mailto:${business.enquiriesEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      setStatus('mailto')
+      return
+    }
+
+    setStatus('sending')
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      })
+      if (!res.ok) throw new Error(`Form service responded ${res.status}`)
+      setStatus('sent')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -98,16 +126,6 @@ export default function Contact() {
         <meta name="twitter:description" content="Get in touch with Principles Financial Consultants in Ruimsig, Gauteng." />
         <meta name="twitter:image" content="https://principlesfc.co.za/og-image.jpg" />
       </Helmet>
-
-      {/* hidden Netlify form detection */}
-      <form name="contact" data-netlify="true" hidden>
-        <input type="hidden" name="form-name" value="contact" />
-        <input name="name" />
-        <input name="email" />
-        <input name="phone" />
-        <select name="subject" />
-        <textarea name="message" />
-      </form>
 
       {/* Page header */}
       <section style={{ backgroundColor: '#0E2233', paddingTop: 72 }} className="py-20 md:py-28">
@@ -194,40 +212,74 @@ export default function Contact() {
               transition={{ delay: 0.15, duration: 0.7 }}
               className="lg:col-span-3"
             >
-              {submitted ? (
-                <div style={{ backgroundColor: '#EDE9E2', border: '1px solid rgba(176,141,79,0.3)', padding: '56px 40px', textAlign: 'center' }}>
+              {status === 'sent' || status === 'mailto' ? (
+                <div role="status" style={{ backgroundColor: '#EDE9E2', border: '1px solid rgba(176,141,79,0.3)', padding: '56px 40px', textAlign: 'center' }}>
                   <div style={{ width: 48, height: 48, borderRadius: '50%', border: '1.5px solid #B08D4F', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                       <path d="M4 11l5 5 9-9" stroke="#B08D4F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <h3 style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: '1.6rem', color: '#0E2233', marginBottom: 12 }}>Message received.</h3>
-                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', color: '#6B6B6B', lineHeight: 1.7 }}>Thank you for reaching out. One of our advisors will be in touch with you shortly.</p>
+                  <h3 style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: '1.6rem', color: '#0E2233', marginBottom: 12 }}>{status === 'mailto' ? 'Your email app should now open.' : 'Message received.'}</h3>
+                  <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', color: '#6B6B6B', lineHeight: 1.7 }}>
+                    {status === 'mailto' ? (
+                      <>
+                        We've prepared an email with your message. Press send in your email app to reach us. If nothing opened, email{' '}
+                        <a href={`mailto:${business.enquiriesEmail}`} style={{ color: '#7D6134' }}>{business.enquiriesEmail}</a>{' '}
+                        or call <a href={business.landlineHref} style={{ color: '#7D6134' }}>{business.landline}</a>.
+                      </>
+                    ) : (
+                      'Thank you for reaching out. One of our advisors will be in touch with you shortly.'
+                    )}
+                  </p>
                 </div>
               ) : (
                 <form
                   name="contact"
-                  method="POST"
-                  data-netlify="true"
+                  method="post"
+                  action={FORM_ENDPOINT || `mailto:${business.enquiriesEmail}`}
+                  encType={FORM_ENDPOINT ? undefined : 'text/plain'}
                   onSubmit={handleSubmit}
-                  style={{ display: 'flex', flexDirection: 'column', gap: 0 }}
+                  style={{ display: 'flex', flexDirection: 'column', gap: 0, position: 'relative' }}
                 >
-                  <input type="hidden" name="form-name" value="contact" />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                     {/* Name */}
-                    <FormField label="Full name" name="name" type="text" required placeholder="Your name" />
+                    <FormField label="Full name" name="name" type="text" required placeholder="Your name" autoComplete="name" maxLength={100} />
                     {/* Email */}
-                    <FormField label="Email address" name="email" type="email" required placeholder="you@example.com" />
+                    <FormField label="Email address" name="email" type="email" required placeholder="you@example.com" autoComplete="email" maxLength={254} />
                     {/* Phone */}
-                    <FormField label="Phone number" name="phone" type="tel" placeholder="+27 XX XXX XXXX" />
+                    <FormField label="Phone number" name="phone" type="tel" placeholder="+27 XX XXX XXXX" autoComplete="tel" maxLength={30} />
                     {/* Subject */}
                     <FormField label="Service of interest" name="subject" type="select" options={subjects} />
                   </div>
                   {/* Message */}
-                  <FormField label="Message" name="message" type="textarea" required placeholder="Tell us about your situation and how we can help…" />
+                  <FormField label="Message" name="message" type="textarea" required maxLength={5000} placeholder="Tell us about your situation and how we can help…" />
+
+                  {/* Honeypot for spam bots; hidden from people and screen readers. */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: -10000, width: 1, height: 1, overflow: 'hidden' }}>
+                    <label>
+                      Leave this field empty
+                      <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
+                    </label>
+                  </div>
+
+                  <label style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '24px 24px 0', fontFamily: 'Inter, sans-serif', fontSize: '0.825rem', lineHeight: 1.6, color: '#3a3a3a', cursor: 'pointer' }}>
+                    <input type="checkbox" name="consent" value="yes" required style={{ marginTop: 4, width: 16, height: 16, flexShrink: 0, accentColor: '#B08D4F', cursor: 'pointer' }} />
+                    <span>
+                      I agree that Principles Financial Consultants may use the details I've provided to respond to my enquiry, as set out in the{' '}
+                      <Link to="/privacy" style={{ color: '#7D6134', textDecoration: 'underline', textUnderlineOffset: 3 }}>Privacy Policy</Link>.
+                      <span style={{ color: '#B08D4F' }}> *</span>
+                    </span>
+                  </label>
 
                   <div style={{ padding: '24px 24px 0' }}>
+                    {status === 'error' && (
+                      <p role="alert" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', lineHeight: 1.6, color: '#9B2C2C', marginBottom: 16 }}>
+                        Sorry, your message couldn't be sent. Please try again, or email{' '}
+                        <a href={`mailto:${business.enquiriesEmail}`} style={{ color: 'inherit', textDecoration: 'underline' }}>{business.enquiriesEmail}</a>{' '}
+                        or call <a href={business.landlineHref} style={{ color: 'inherit', textDecoration: 'underline' }}>{business.landline}</a>.
+                      </p>
+                    )}
                     <button
                       type="submit"
                       disabled={sending}
@@ -271,16 +323,7 @@ export default function Contact() {
       {/* Map */}
       <section style={{ backgroundColor: '#EDE9E2' }}>
         <div style={{ maxHeight: 440, overflow: 'hidden', position: 'relative' }}>
-          <iframe
-            title="Principles Financial Consultants — Ruimsig, Gauteng"
-            src="https://maps.google.com/maps?q=Ruimsig,+Roodepoort,+Gauteng,+South+Africa&output=embed&z=14"
-            width="100%"
-            height="440"
-            style={{ border: 0, display: 'block', filter: 'grayscale(20%) contrast(1.05)' }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <MapEmbed />
           {/* Overlay caption */}
           <div style={{
             position: 'absolute', bottom: 24, left: 24,
@@ -301,7 +344,7 @@ export default function Contact() {
   )
 }
 
-function FormField({ label, name, type, required, placeholder, options }) {
+function FormField({ label, name, type, required, placeholder, options, autoComplete, maxLength }) {
   const base = {
     width: '100%',
     fontFamily: 'Inter, sans-serif',
@@ -321,21 +364,24 @@ function FormField({ label, name, type, required, placeholder, options }) {
 
   return (
     <div style={wrapper}>
-      <label style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B08D4F', display: 'block', marginBottom: 4 }}>
+      <label htmlFor={name} style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#B08D4F', display: 'block', marginBottom: 4 }}>
         {label}{required && <span style={{ color: '#B08D4F' }}> *</span>}
       </label>
       {type === 'textarea' ? (
         <textarea
+          id={name}
           name={name}
           required={required}
           placeholder={placeholder}
           rows={5}
+          maxLength={maxLength}
           style={{ ...base, resize: 'vertical', paddingTop: 12 }}
           onFocus={e => e.target.style.borderBottomColor = '#B08D4F'}
           onBlur={e => e.target.style.borderBottomColor = 'rgba(14,34,51,0.18)'}
         />
       ) : type === 'select' ? (
         <select
+          id={name}
           name={name}
           style={{ ...base, cursor: 'pointer', backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5L6 8l4-3.5' stroke='%23B08D4F' strokeWidth='1.4' fill='none' strokeLinecap='round'/%3E%3C/svg%3E\")", backgroundRepeat: 'no-repeat', backgroundPosition: 'right 4px center' }}
           onFocus={e => e.target.style.borderBottomColor = '#B08D4F'}
@@ -346,8 +392,11 @@ function FormField({ label, name, type, required, placeholder, options }) {
         </select>
       ) : (
         <input
+          id={name}
           type={type}
           name={name}
+          autoComplete={autoComplete}
+          maxLength={maxLength}
           required={required}
           placeholder={placeholder}
           style={base}
