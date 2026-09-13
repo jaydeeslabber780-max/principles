@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import logo from '../assets/logo-full.png'
+import logo from '../assets/logo-full-navy.png'
 
 const services = [
   { label: 'Group Retirement Fund', anchor: 'group-retirement' },

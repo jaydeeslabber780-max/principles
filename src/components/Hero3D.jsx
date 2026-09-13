@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react'
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 const NAVY = '#0E2233'
 const NAVY_LIGHT = '#162d40'
@@ -8,29 +8,21 @@ const GOLD = '#B08D4F'
 const GOLD_DARK = '#8B6D35'
 const GOLD_LIGHT = '#C9A96E'
 
+const particles = [
+  { x: '15%', y: '20%', size: 4, delay: 0 },
+  { x: '75%', y: '65%', size: 3, delay: 1.2 },
+  { x: '85%', y: '25%', size: 5, delay: 0.6 },
+  { x: '20%', y: '70%', size: 3, delay: 1.8 },
+  { x: '55%', y: '85%', size: 4, delay: 0.3 },
+]
+
 export default function Hero3D() {
   const containerRef = useRef(null)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const rotateY = useSpring(useMotionValue(-25), { stiffness: 40, damping: 20 })
-  const rotateX = useSpring(useMotionValue(12), { stiffness: 40, damping: 20 })
-
   const tiltX = useTransform(mouseY, [-200, 200], [8, -8])
   const tiltY = useTransform(mouseX, [-200, 200], [-8, 8])
-
-  // auto-rotate
-  useEffect(() => {
-    let frame
-    let angle = -25
-    const loop = () => {
-      angle += 0.3
-      rotateY.set(angle)
-      frame = requestAnimationFrame(loop)
-    }
-    frame = requestAnimationFrame(loop)
-    return () => cancelAnimationFrame(frame)
-  }, [])
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return
@@ -132,7 +124,7 @@ export default function Hero3D() {
         position: 'relative',
       }}
     >
-      {/* Floating orbit rings */}
+      {/* Floating orbit rings; the mouse tilt is the only JS-driven motion here */}
       <motion.div
         style={{
           position: 'absolute',
@@ -143,8 +135,9 @@ export default function Hero3D() {
         }}
       >
         {[1, 0.72, 0.5].map((scale, i) => (
-          <motion.div
+          <div
             key={i}
+            className="hero-ring"
             style={{
               position: 'absolute',
               top: '50%', left: '50%',
@@ -154,9 +147,9 @@ export default function Hero3D() {
               border: `1px solid rgba(176,141,79,${0.18 + i * 0.06})`,
               borderRadius: '50%',
               transformStyle: 'preserve-3d',
+              animationDuration: `${12 + i * 6}s`,
+              animationDirection: i % 2 === 0 ? 'normal' : 'reverse',
             }}
-            animate={{ rotateZ: 360 * (i % 2 === 0 ? 1 : -1) }}
-            transition={{ duration: 12 + i * 6, repeat: Infinity, ease: 'linear' }}
           >
             {/* dot on ring */}
             <div style={{
@@ -164,42 +157,42 @@ export default function Hero3D() {
               width: 6, height: 6, borderRadius: '50%',
               background: GOLD, opacity: 0.7,
             }} />
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* 3D Cube */}
-      <motion.div
-        style={{
-          position: 'relative',
-          width: W, height: H,
-          transformStyle: 'preserve-3d',
-          rotateY: rotateY,
-          rotateX: rotateX,
-        }}
-        className="float-anim"
-      >
-        {faces.map((face, i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              top: 0, left: 0,
-              width: W, height: H,
-              background: face.bg,
-              border: face.border,
-              backfaceVisibility: 'hidden',
-              display: 'flex',
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-              overflow: 'hidden',
-              ...face.style,
-            }}
-          >
-            {face.content}
           </div>
         ))}
       </motion.div>
+
+      {/* 3D cube. Float (outer) and spin (inner) are separate elements because
+          both animate `transform`; on one element one would override the other. */}
+      <div
+        className="float-anim"
+        style={{ position: 'relative', width: W, height: H, transformStyle: 'preserve-3d' }}
+      >
+        <div
+          className="cube-spin"
+          style={{ position: 'relative', width: W, height: H, transformStyle: 'preserve-3d' }}
+        >
+          {faces.map((face, i) => (
+            <div
+              key={i}
+              style={{
+                position: 'absolute',
+                top: 0, left: 0,
+                width: W, height: H,
+                background: face.bg,
+                border: face.border,
+                backfaceVisibility: 'hidden',
+                display: 'flex',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                overflow: 'hidden',
+                ...face.style,
+              }}
+            >
+              {face.content}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Shadow */}
       <div style={{
@@ -214,25 +207,19 @@ export default function Hero3D() {
       }} />
 
       {/* Floating particles */}
-      {[
-        { x: '15%', y: '20%', size: 4, delay: 0 },
-        { x: '75%', y: '65%', size: 3, delay: 1.2 },
-        { x: '85%', y: '25%', size: 5, delay: 0.6 },
-        { x: '20%', y: '70%', size: 3, delay: 1.8 },
-        { x: '55%', y: '85%', size: 4, delay: 0.3 },
-      ].map((p, i) => (
-        <motion.div
+      {particles.map((p, i) => (
+        <div
           key={i}
+          className="hero-particle"
           style={{
             position: 'absolute',
             left: p.x, top: p.y,
             width: p.size, height: p.size,
             borderRadius: '50%',
             background: GOLD,
-            opacity: 0.5,
+            animationDuration: `${3.5 + i * 0.5}s`,
+            animationDelay: `${p.delay}s`,
           }}
-          animate={{ y: [0, -12, 0], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 3.5 + i * 0.5, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
         />
       ))}
     </div>
