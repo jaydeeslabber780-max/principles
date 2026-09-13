@@ -36,7 +36,7 @@ export default function StatStrip() {
   return (
     <section style={{ backgroundColor: '#0E2233' }} className="py-16 md:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-6">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -44,7 +44,7 @@ export default function StatStrip() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col gap-2 text-center md:text-left"
+              className={`flex flex-col gap-2 text-center md:text-left border border-gold/25 bg-white/[0.03] px-3 py-5 md:border-0 md:bg-transparent md:p-0 ${i === stats.length - 1 ? 'col-span-2 md:col-span-1' : ''}`}
             >
               <div
                 className="font-display font-light leading-none"
