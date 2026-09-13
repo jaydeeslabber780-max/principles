@@ -58,12 +58,12 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between" style={{ height: 72 }}>
         {/* Logo */}
-        <Link to="/" aria-label="Principles Financial Consultants Home">
-          <img src={logo} alt="Principles Financial Consultants" style={{ height: 44, width: 'auto' }} />
+        <Link to="/" aria-label="Principles Financial Consultants Home" style={{ flexShrink: 0 }}>
+          <img src={logo} alt="Principles Financial Consultants" style={{ height: 58, width: 'auto' }} />
         </Link>
 
         {/* Desktop Nav */}
-        <nav aria-label="Main navigation" className="hidden md:flex items-center gap-8">
+        <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-8">
           <NavLink to="/" end style={navLinkStyle}>Home</NavLink>
           <NavLink to="/about" style={navLinkStyle}>About</NavLink>
 
@@ -157,7 +157,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMobileOpen(v => !v)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}

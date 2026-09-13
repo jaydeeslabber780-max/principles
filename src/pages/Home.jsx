@@ -75,7 +75,7 @@ export default function Home() {
                   style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#B08D4F', display: 'flex', alignItems: 'center', gap: 10 }}
                 >
                   <span style={{ display: 'inline-block', width: 28, height: 1, background: '#B08D4F' }} />
-                  Ruimsig, Gauteng · Est. FSP 19721
+                  Ruimsig, Gauteng · Est.&nbsp;2005
                 </span>
                 <h1
                   style={{
