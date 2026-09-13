@@ -7,6 +7,7 @@ const NAVY_DEEP = '#081520'
 const GOLD = '#B08D4F'
 const GOLD_DARK = '#8B6D35'
 const GOLD_LIGHT = '#C9A96E'
+const CREAM = '#F7F4EF'
 
 const particles = [
   { x: '15%', y: '20%', size: 4, delay: 0 },
@@ -15,6 +16,21 @@ const particles = [
   { x: '20%', y: '70%', size: 3, delay: 1.8 },
   { x: '55%', y: '85%', size: 4, delay: 0.3 },
 ]
+
+// The label shown on every face. On the gold sides it's navy so it stays legible.
+function FaceLabel({ textColor, ruleColor }) {
+  return (
+    <div style={{ padding: 18 }}>
+      <div style={{ width: 28, height: 2, background: ruleColor, marginBottom: 12 }} />
+      <div style={{ fontFamily: 'Fraunces, serif', color: textColor, fontSize: 13, fontWeight: 300, lineHeight: 1.5, opacity: 0.9 }}>
+        Financial<br />Advisory
+      </div>
+    </div>
+  )
+}
+
+const onNavy = <FaceLabel textColor={CREAM} ruleColor={GOLD} />
+const onGold = <FaceLabel textColor={NAVY} ruleColor={NAVY} />
 
 export default function Hero3D() {
   const containerRef = useRef(null)
@@ -46,21 +62,14 @@ export default function Hero3D() {
       style: { transform: `translateZ(${D / 2}px)`, width: W, height: H },
       bg: `linear-gradient(135deg, ${NAVY_LIGHT} 0%, ${NAVY} 100%)`,
       border: `1px solid rgba(176,141,79,0.25)`,
-      content: (
-        <div style={{ padding: 18 }}>
-          <div style={{ width: 28, height: 2, background: GOLD, marginBottom: 12 }} />
-          <div style={{ fontFamily: 'Fraunces, serif', color: '#F7F4EF', fontSize: 13, fontWeight: 300, lineHeight: 1.5, opacity: 0.9 }}>
-            Financial<br />Advisory
-          </div>
-        </div>
-      ),
+      content: onNavy,
     },
     {
       // back
       style: { transform: `rotateY(180deg) translateZ(${D / 2}px)`, width: W, height: H },
       bg: NAVY_DEEP,
       border: '1px solid rgba(176,141,79,0.1)',
-      content: null,
+      content: onNavy,
     },
     {
       // right
@@ -71,7 +80,7 @@ export default function Hero3D() {
       },
       bg: `linear-gradient(180deg, ${GOLD_LIGHT} 0%, ${GOLD} 40%, ${GOLD_DARK} 100%)`,
       border: 'none',
-      content: null,
+      content: onGold,
     },
     {
       // left
@@ -82,7 +91,7 @@ export default function Hero3D() {
       },
       bg: `linear-gradient(180deg, ${GOLD_DARK} 0%, ${GOLD} 100%)`,
       border: 'none',
-      content: null,
+      content: onGold,
     },
     {
       // top
@@ -93,7 +102,7 @@ export default function Hero3D() {
       },
       bg: `linear-gradient(135deg, rgba(22,45,64,0.9) 0%, rgba(14,34,51,0.8) 100%)`,
       border: '1px solid rgba(176,141,79,0.2)',
-      content: null,
+      content: onNavy,
     },
     {
       // bottom
@@ -104,7 +113,7 @@ export default function Hero3D() {
       },
       bg: NAVY_DEEP,
       border: 'none',
-      content: null,
+      content: onNavy,
     },
   ]
 
